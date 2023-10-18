@@ -21,7 +21,7 @@ runs:
       run: |
         echo $(which chromium-browser)
         $(which chromium-browser) --headless https://www.chromestatus.com
-      shell: bash
+      shell: nix-shell --comand "bash"
     - name: 'Render'
       env:
         QUARTO_PRINT_STACK: true
@@ -36,4 +36,4 @@ runs:
         elif [ -f "_site" ]; then
           echo "QUARTO_OUTPUT=_site" >> $GITHUB_ENV
         fi
-      shell: bash
+      shell: nix-shell --comand "bash"
