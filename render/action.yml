@@ -26,9 +26,9 @@ runs:
         QUARTO_PRINT_STACK: true
       run: | 
         if [ "${{ inputs.to }}" == "" ]; then
-          nix develop --command bash -c 'quarto render ${{ inputs.path }}'
+          nix-shell --run 'quarto render ${{ inputs.path }}'
         else
-          nix develop --command bash -c 'quarto render ${{ inputs.path }} --to ${{ inputs.to }}'
+          nix-shell --run 'quarto render ${{ inputs.path }} --to ${{ inputs.to }}'
         fi
         if [ -f "_book" ]; then
           echo "QUARTO_OUTPUT=_book" >> $GITHUB_ENV
