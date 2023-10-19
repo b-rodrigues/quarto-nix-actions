@@ -19,14 +19,14 @@ runs:
     - name: 'Check Chromium'
       if: ${{ runner.os == 'Linux' }}
       run: |
-        nix develop --command bash 'echo $(which chromium-browser)'
-        nix develop --command bash '$(which chromium-browser) --headless https://www.chromestatus.com'
+        nix develop --command bash -c 'echo $(which chromium-browser)'
+        nix develop --command bash -c '$(which chromium-browser) --headless https://www.chromestatus.com'
     - name: 'Render'
       env:
         QUARTO_PRINT_STACK: true
       run: | 
-        nix develop --command bash \
-        if [ "${{ inputs.to }}" == "" ]; then \
+        nix develop --command bash -c \
+        'if [ "${{ inputs.to }}" == "" ]; then \
           quarto render ${{ inputs.path }} \
         else \
           quarto render ${{ inputs.path }} --to ${{ inputs.to }} \
@@ -35,4 +35,4 @@ runs:
           echo "QUARTO_OUTPUT=_book" >> $GITHUB_ENV \
         elif [ -f "_site" ]; then \
           echo "QUARTO_OUTPUT=_site" >> $GITHUB_ENV \
-        fi
+        fi'
