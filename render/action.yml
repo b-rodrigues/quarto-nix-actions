@@ -19,8 +19,8 @@ runs:
     - name: 'Check Chromium'
       if: ${{ runner.os == 'Linux' }}
       run: |
-        nix develop --command bash -c 'echo $(which chromium-browser)'
-        nix develop --command bash -c '$(which chromium-browser) --headless https://www.chromestatus.com'
+        echo $(which chromium-browser)
+        $(which chromium-browser) --headless https://www.chromestatus.com
     - name: 'Render'
       env:
         QUARTO_PRINT_STACK: true
