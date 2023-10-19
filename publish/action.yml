@@ -55,7 +55,7 @@ runs:
           TARGET="${{ inputs.target }}"
         fi
         if [ "${{ inputs.render }}" != "true" ]; then
-          nix-shell --run 'quarto publish $TARGET ${{ inputs.path }} --no-render --no-browser'
+          nix-shell --run 'quarto publish gh-pages ${{ inputs.path }} --no-render --no-browser'
         else
-          nix-shell --run 'quarto publish $TARGET ${{ inputs.path }} --no-browser'
+          nix-shell --run 'quarto publish gh-pages ${{ inputs.path }} --no-browser'
         fi
