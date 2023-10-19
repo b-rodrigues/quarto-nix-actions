@@ -25,14 +25,13 @@ runs:
       env:
         QUARTO_PRINT_STACK: true
       run: | 
-        nix develop --command bash -c \
-        'if [ "${{ inputs.to }}" == "" ]; then \
-          quarto render ${{ inputs.path }} \
+        if [ "${{ inputs.to }}" == "" ]; then \
+          nix develop --command bash -c 'quarto render ${{ inputs.path }}' \
         else \
-          quarto render ${{ inputs.path }} --to ${{ inputs.to }} \
+          nix develop --command bash -c 'quarto render ${{ inputs.path }} --to ${{ inputs.to }}' \
         fi \
         if [ -f "_book" ]; then \
           echo "QUARTO_OUTPUT=_book" >> $GITHUB_ENV \
         elif [ -f "_site" ]; then \
           echo "QUARTO_OUTPUT=_site" >> $GITHUB_ENV \
-        fi'
+        fi
